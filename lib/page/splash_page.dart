@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_yourche/page/mine_page.dart';
+import 'package:flutter_yourche/page/normal_login_page.dart';
 import 'package:flutter_yourche/widgets/common_color.dart';
 
 class SplashPage extends StatefulWidget {
@@ -57,7 +58,7 @@ class _SplashPageState extends State<SplashPage> {
       _timer = Timer(Duration(seconds: 3), () {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (_) {
-          return MinePage();
+          return NormalLoginPage();
         }), (route) => route == null);
       });
     }

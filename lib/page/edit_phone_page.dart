@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_yourche/widgets/appbar.dart';
 import 'package:flutter_yourche/widgets/common_button.dart';
 import 'package:flutter_yourche/widgets/common_color.dart';
@@ -71,6 +72,7 @@ class _EditPhonePageState extends State<EditPhonePage> {
                             maxLength: 11,
                             enableInteractiveSelection: false,
                             keyboardType: TextInputType.number,
+                            inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
                             textInputAction: TextInputAction.next,
                             controller: _phoneController,
                             decoration: InputDecoration(
@@ -121,6 +123,7 @@ class _EditPhonePageState extends State<EditPhonePage> {
                             maxLength: 6,
                             enableInteractiveSelection: false,
                             keyboardType: TextInputType.number,
+                            inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
                             textInputAction: TextInputAction.next,
                             controller: _codeController,
                             decoration: InputDecoration(
