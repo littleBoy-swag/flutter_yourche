@@ -7,6 +7,7 @@ import 'package:flutter_yourche/page/edit_profile_page.dart';
 import 'package:flutter_yourche/page/feedback_page.dart';
 import 'package:flutter_yourche/page/moments_page.dart';
 import 'package:flutter_yourche/page/my_garage_page.dart';
+import 'package:flutter_yourche/page/owner_main_page.dart';
 import 'package:flutter_yourche/page/settings_page.dart';
 import 'package:flutter_yourche/widgets/appbar.dart';
 import 'package:flutter_yourche/widgets/common_color.dart';
@@ -33,7 +34,7 @@ class _MinePageState extends State<MinePage> {
             InkWell(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                  return EditProfilePage();
+                  return OwnerMainPage();
                 }));
               },
               child: Container(
