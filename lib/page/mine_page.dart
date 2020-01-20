@@ -11,6 +11,7 @@ import 'package:flutter_yourche/page/settings_page.dart';
 import 'package:flutter_yourche/widgets/appbar.dart';
 import 'package:flutter_yourche/widgets/common_color.dart';
 import 'package:flutter_yourche/widgets/item_view.dart';
+import 'package:flutter_yourche/widgets/share_bottom_dialog.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -23,6 +24,7 @@ class _MinePageState extends State<MinePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: againstStatusBarView(),
       body: Container(
         width: double.infinity,
@@ -94,9 +96,10 @@ class _MinePageState extends State<MinePage> {
               }));
             }),
             ItemView("我的吐槽", "images/ic_moment.png", () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                return MomentsPage();
-              }));
+//              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+//                return MomentsPage();
+//              }));
+            ShareBottomDialog(context).show();
             }),
             ItemView("关于我们", "images/ic_about_us.png", () {
               Navigator.of(context).push(MaterialPageRoute(builder: (_) {

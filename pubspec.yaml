@@ -66,6 +66,11 @@ flutter:
     - images/ic_default_avatar.png
     - images/ic_splash_slogan.png
     - images/ic_bg_main_page.png
+    - images/ic_share_qzone.png
+    - images/ic_share_wechat.png
+    - images/ic_share_weibo.png
+    - images/ic_share_moments.png
+    - images/ic_share_qq.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
