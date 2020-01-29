@@ -10,3 +10,5 @@ final c_ff9e13 = 0xFFFF9E13;
 final c_ff9bc6 = 0xFFFF9BC6;
 final c_86cdff = 0xFF86CDFF;
 final c_cccccc = 0xFFCCCCCC;
+final c_f7d66d = 0xFFF7D66D;
+final c_fcae26 = 0xFFFCAE26;

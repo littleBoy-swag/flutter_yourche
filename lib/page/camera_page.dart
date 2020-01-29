@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_yourche/page/photo_preview_page.dart';
+import 'package:path_provider/path_provider.dart';
 
 class CameraPage extends StatefulWidget {
   @override
@@ -113,10 +117,13 @@ class _CameraPageState extends State<CameraPage> {
                           SizedBox(
                             width: 69,
                           ),
-                          Container(
-                            width: 63,
-                            height: 63,
-                            color: Colors.blueAccent,
+                          InkWell(
+                            onTap: _captureImage,
+                            child: Container(
+                              width: 63,
+                              height: 63,
+                              color: Colors.blueAccent,
+                            ),
                           ),
                           SizedBox(
                             width: 69,
@@ -161,5 +168,62 @@ class _CameraPageState extends State<CameraPage> {
       }
       setState(() {});
     });
+  }
+
+  void _captureImage() async {
+    if (_controller.value.isInitialized) {
+      final Directory extDir = await getApplicationDocumentsDirectory();
+      final String dirPath = "${extDir.path}/media";
+      await Directory(dirPath).create(recursive: true);
+      final String filePath =
+          "$dirPath/${DateTime.now().millisecondsSinceEpoch.toString()}.jpeg";
+      print(filePath);
+      await _controller.takePicture(filePath);
+      //跳转至照片预览页面
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+        return PhotoPreViewPage(
+          imgPath: filePath,
+        );
+      }));
+    }
+  }
+
+  Future<String> _startVideoRecord() async {
+    if (!_controller.value.isInitialized) {
+      return null;
+    }
+
+    final Directory extDir = await getApplicationDocumentsDirectory();
+    final String dirPath = "${extDir.path}/media";
+    await Directory(dirPath).create(recursive: true);
+    final String filePath =
+        "$dirPath/${DateTime.now().millisecondsSinceEpoch.toString()}.mp4";
+    print(filePath);
+    if (_controller.value.isRecordingVideo) {
+      return null;
+    }
+    try {
+      await _controller.startVideoRecording(filePath);
+    } on CameraException catch (e) {
+      return null;
+    }
+    return filePath;
+  }
+
+  Future<void> _stopVideoRecord() async {
+    if (!_controller.value.isRecordingVideo) {
+      return null;
+    }
+    try {
+      await _controller.stopVideoRecording();
+      //视频录制结束后跳转至视频预览页
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+        return PhotoPreViewPage(
+          imgPath: "",
+        );
+      }));
+    } on CameraException catch (e) {
+      return null;
+    }
   }
 }
