@@ -16,7 +16,7 @@ class ShareBottomDialog {
         return Container(
           color: Colors.white,
           width: double.infinity,
-          height: 255,
+          height: 260,
           child: Column(
             children: <Widget>[
               Padding(

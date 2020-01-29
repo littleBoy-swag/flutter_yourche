@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_yourche/page/mine_page.dart';
 import 'package:flutter_yourche/page/normal_login_page.dart';
 import 'package:flutter_yourche/page/owner_main_page.dart';
+import 'package:flutter_yourche/page/register_page.dart';
 import 'package:flutter_yourche/widgets/common_button.dart';
 import 'package:flutter_yourche/widgets/common_color.dart';
 
@@ -80,7 +81,7 @@ class _OneKeyLoginPageState extends State<OneKeyLoginPage> {
                 callback: () {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (_) {
-                        return MinePage();
+                        return RegisterPage();
                       }), (route) => route == null);
                 },
               ),
