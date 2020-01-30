@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_yourche/page/one_key_login_page.dart';
+import 'package:flutter_yourche/page/post_moment_page.dart';
 import 'package:flutter_yourche/widgets/common_button.dart';
 import 'package:flutter_yourche/widgets/common_color.dart';
 import 'package:flutter_yourche/widgets/divider_line.dart';
@@ -128,7 +129,11 @@ class _NormalLoginPageState extends State<NormalLoginPage> {
               child: CommonButton(
                 height: 48,
                 content: "登录",
-                callback: () {},
+                callback: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                    return PostMomentPage();
+                  }));
+                },
               ),
             ),
             Row(

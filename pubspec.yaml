@@ -81,6 +81,7 @@ flutter:
     - images/ic_camera_photo.png
     - images/ic_camera_switch.png
     - images/ic_camera_flash.png
+    - images/ic_moments_camera.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
