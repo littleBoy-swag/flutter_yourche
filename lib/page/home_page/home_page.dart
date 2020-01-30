@@ -9,16 +9,14 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
-  final _tabTitles = ["首页", "消息"];
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   final _tabTextSelected = TextStyle(color: Color(c_ff6600), fontSize: 10);
   final _tabTextNormal = TextStyle(color: Color(c_666666), fontSize: 10);
 
   var _tabIndex = 0;
   var _pages;
   var _tabImages;
-
-  var _body;
 
   Image _getTabImage(path) {
     return Image.asset(path, width: 22, height: 22);
