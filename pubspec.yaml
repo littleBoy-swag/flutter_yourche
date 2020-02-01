@@ -90,6 +90,8 @@ flutter:
     - images/ic_msg_notification.png
     - images/ic_msg_notification_robot.png
     - images/ic_update_header.png
+    - images/ic_garage_normal_car.png
+    - images/ic_garage_item_more.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
