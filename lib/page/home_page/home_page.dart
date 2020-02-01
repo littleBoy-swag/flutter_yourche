@@ -3,6 +3,7 @@ import 'package:flutter_yourche/page/camera_page.dart';
 import 'package:flutter_yourche/page/home_page/home_moments_tab_page.dart';
 import 'package:flutter_yourche/page/home_page/home_msg_tab_page.dart';
 import 'package:flutter_yourche/widgets/common_color.dart';
+import 'package:flutter_yourche/widgets/update/update_util.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,6 +26,9 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      UpdateUtil.checkUpdate(context);
+    });
     _pages = <Widget>[HomeMomentsTabPage(), HomeMsgTabPage()];
     if (_tabImages == null) {
       _tabImages = [

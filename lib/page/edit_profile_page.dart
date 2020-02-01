@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_yourche/widgets/action_sheet/action_sheet.dart';
 import 'package:flutter_yourche/widgets/action_sheet/action_sheet_item.dart';
+import 'package:flutter_yourche/widgets/city_picker.dart';
 import 'package:flutter_yourche/widgets/common_color.dart';
 import 'package:flutter_yourche/widgets/divider_line.dart';
+import 'package:flutter_yourche/widgets/my_date_picker.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -174,12 +176,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               .show();
                         }),
                         DividerLine(1),
-                        _itemInfo("生日", "1995.01.01", () {
-                          print("生日");
+                        _itemInfo("生日", birthday_label, () {
+                          MyDatePicker.showDatePicker(context);
                         }),
                         DividerLine(1),
-                        _itemInfo("家乡", "江苏-南京", () {
-                          print("家乡");
+                        _itemInfo("家乡", hometown_label, () {
+                          CityPicker.showCityPicker(
+                              context, (prov, provCode, city, cityCode) {
+                                setState(() {
+                                  hometown_label = prov + " - " + city;
+                                });
+                          });
                         }),
                       ],
                     ),
@@ -201,7 +208,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 8,right: 8),
+                        padding: EdgeInsets.only(left: 8, right: 8),
                         child: TextField(
                           controller: _controller,
                           decoration: InputDecoration(
