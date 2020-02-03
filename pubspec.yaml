@@ -27,6 +27,8 @@ dependencies:
   path: ^1.6.2
   camera: ^0.5.7+1
   path_provider: ^1.4.4
+  easy_contact_picker: ^0.0.2
+  permission_handler: 4.2.0+hotfix.3
 
 dev_dependencies:
   flutter_test:
@@ -92,6 +94,8 @@ flutter:
     - images/ic_update_header.png
     - images/ic_garage_normal_car.png
     - images/ic_garage_item_more.png
+    - images/ic_check_box_checked.png
+    - images/ic_check_box_unchecked.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

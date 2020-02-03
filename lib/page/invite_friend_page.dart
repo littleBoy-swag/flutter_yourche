@@ -1,7 +1,11 @@
+import 'package:easy_contact_picker/easy_contact_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_yourche/widgets/appbar.dart';
 import 'package:flutter_yourche/widgets/common_color.dart';
+import 'package:flutter_yourche/widgets/divider_line.dart';
+import 'package:flutter_yourche/widgets/my_check_box.dart';
 import 'package:flutter_yourche/widgets/toast.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class InviteFriendPage extends StatefulWidget {
   @override
@@ -10,7 +14,17 @@ class InviteFriendPage extends StatefulWidget {
 
 class _InviteFriendPageState extends State<InviteFriendPage> {
   int _selectNum = 0;
-  List<String> _letters = ["A", "B", "C", "D", "F", "G"];
+  List<String> _letters = List();
+
+  List<Contact> _contacts = List();
+  List<bool> _checkList = List();
+  final EasyContactPicker _picker = EasyContactPicker();
+
+  @override
+  void initState() {
+    super.initState();
+    _reqPermission();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +120,60 @@ class _InviteFriendPageState extends State<InviteFriendPage> {
         alignment: Alignment.center,
         children: <Widget>[
           Positioned(
+              child: ListView.separated(
+            physics: BouncingScrollPhysics(),
+            separatorBuilder: (context, index) {
+              return DividerLine(1);
+            },
+            itemBuilder: (context, index) {
+              return Column(
+                children: <Widget>[
+                  Visibility(
+                    child: Container(
+                      color: Color(c_f5f5f5),
+                      width: double.infinity,
+                      height: 30,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            _contacts[index].firstLetter,
+                            style:
+                                TextStyle(fontSize: 16, color: Color(c_333333)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    visible: (index == 0 ||
+                        _contacts[index].firstLetter !=
+                            _contacts[index - 1].firstLetter),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      _checkList[index] = !_checkList[index];
+                      _selectNum = 0;
+                      for (var i = 0; i < _checkList.length; i++) {
+                        if (_checkList[i]) {
+                          _selectNum++;
+                        }
+                      }
+                      setState(() {});
+                    },
+                    leading: MyCheckBox(
+                      value: _checkList[index],
+                    ),
+                    title: Text(
+                      "${_contacts[index].fullName}",
+                      style: TextStyle(color: Color(c_333333), fontSize: 16),
+                    ),
+                  )
+                ],
+              );
+            },
+            itemCount: _contacts.length,
+          )),
+          Positioned(
             right: 0,
             child: Padding(
               padding: EdgeInsets.only(right: 4),
@@ -117,9 +185,17 @@ class _InviteFriendPageState extends State<InviteFriendPage> {
                 width: 24,
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: _getLetters(),
+                  child: GestureDetector(
+                    onTap: () {
+                      print("taptap");
+                    },
+                    onLongPressMoveUpdate: (details) {
+                      print("changed");
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: _getLetters(),
+                    ),
                   ),
                 ),
               ),
@@ -137,5 +213,31 @@ class _InviteFriendPageState extends State<InviteFriendPage> {
         style: TextStyle(fontSize: 12, color: Color(c_333333)),
       );
     }).toList();
+  }
+
+  void _reqPermission() async {
+    // 申请权限
+    Map<PermissionGroup, PermissionStatus> permissions =
+        await PermissionHandler()
+            .requestPermissions([PermissionGroup.contacts]);
+    PermissionStatus permission = await PermissionHandler()
+        .checkPermissionStatus(PermissionGroup.contacts);
+    if (permission == PermissionStatus.granted) {
+      _getContacts();
+    }
+  }
+
+  void _getContacts() async {
+    List<Contact> _list = await _picker.selectContacts();
+    for (var i = 0; i < _list.length; i++) {
+      _checkList.add(false);
+      if (!_letters.contains(_list[i].firstLetter)) {
+        _letters.add(_list[i].firstLetter);
+      }
+      _letters.sort((l, r) => l.compareTo(r));
+    }
+    setState(() {
+      _contacts = _list;
+    });
   }
 }
