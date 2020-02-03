@@ -59,49 +59,46 @@ class _OwnerMainPageState extends State<OwnerMainPage> {
               ),
             ),
           ),
-          SliverFixedExtentList(
-            itemExtent: 310,
-            delegate: SliverChildBuilderDelegate((context, index) {
-              return Container(
-                width: double.infinity,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 16, right: 16, top: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 8),
-                        child: Text(
-                          "认证车辆",
-                          style: TextStyle(
-                              fontSize: 17,
-                              color: Color(c_333333),
-                              fontWeight: FontWeight.bold),
-                        ),
+          SliverToBoxAdapter(
+            child: Container(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.only(left: 16, right: 16, top: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 8),
+                      child: Text(
+                        "认证车辆",
+                        style: TextStyle(
+                            fontSize: 17,
+                            color: Color(c_333333),
+                            fontWeight: FontWeight.bold),
                       ),
-                      _itemInfo("座驾", "宝马"),
-                      _itemInfo("车牌照", "苏A****1"),
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 8,top: 30),
-                        child: Text(
-                          "个人信息",
-                          style: TextStyle(
-                              fontSize: 17,
-                              color: Color(c_333333),
-                              fontWeight: FontWeight.bold),
-                        ),
+                    ),
+                    _itemInfo("座驾", "保时捷"),
+                    _itemInfo("车牌照", "苏A****5"),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 8,top: 30),
+                      child: Text(
+                        "个人信息",
+                        style: TextStyle(
+                            fontSize: 17,
+                            color: Color(c_333333),
+                            fontWeight: FontWeight.bold),
                       ),
-                      _itemInfo("家乡", "江苏-南京"),
-                      _itemInfo("星座", "射手座"),
-                      _itemInfo("签名", "欲买桂花同载酒，终不似少年游"),
-                      _itemInfo("身份信息", "已认证"),
-                    ],
-                  ),
+                    ),
+                    _itemInfo("家乡", "江苏-南京"),
+                    _itemInfo("星座", "射手座"),
+                    _itemInfo("签名", "欲买桂花同载酒，终不似少年游"),
+                    _itemInfo("身份信息", "已认证"),
+                  ],
                 ),
-              );
-            }, childCount: 1),
-          ),
+              ),
+            ),
+          )
         ],
       ),
     );

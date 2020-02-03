@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_yourche/page/invite_friend_page.dart';
 import 'package:flutter_yourche/page/one_key_login_page.dart';
 import 'package:flutter_yourche/page/post_moment_page.dart';
 import 'package:flutter_yourche/widgets/common_button.dart';
@@ -131,7 +132,7 @@ class _NormalLoginPageState extends State<NormalLoginPage> {
                 content: "登录",
                 callback: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return PostMomentPage();
+                    return InviteFriendPage();
                   }));
                 },
               ),

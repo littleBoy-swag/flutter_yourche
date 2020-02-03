@@ -10,6 +10,7 @@ import 'package:flutter_yourche/widgets/common_color.dart';
 import 'package:flutter_yourche/widgets/common_strings.dart';
 import 'package:flutter_yourche/widgets/dialog_widgets.dart';
 import 'package:flutter_yourche/widgets/divider_line.dart';
+import 'package:flutter_yourche/widgets/toast.dart';
 
 class AddCarPage extends StatefulWidget {
   @override
@@ -238,6 +239,7 @@ class _AddCarPageState extends State<AddCarPage> {
                         //TODO cancel
                       }, (){
                         //TODO confirm
+                        Toast.show(context, "提交成功");
                       });
                     },
                     child: Container(

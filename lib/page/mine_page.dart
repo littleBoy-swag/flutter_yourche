@@ -20,7 +20,7 @@ class MinePage extends StatefulWidget {
 }
 
 class _MinePageState extends State<MinePage> {
-  var _statusBarHeight = MediaQueryData.fromWindow(window).padding.top;
+  var _statusBarHeight = MediaQueryData.fromWindow (window).padding.top;
 
   @override
   Widget build(BuildContext context) {

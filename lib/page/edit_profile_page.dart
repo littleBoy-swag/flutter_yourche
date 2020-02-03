@@ -6,6 +6,7 @@ import 'package:flutter_yourche/widgets/city_picker.dart';
 import 'package:flutter_yourche/widgets/common_color.dart';
 import 'package:flutter_yourche/widgets/divider_line.dart';
 import 'package:flutter_yourche/widgets/my_date_picker.dart';
+import 'package:flutter_yourche/widgets/toast.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -44,9 +45,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 16),
-            child: InkWell(
+            child: GestureDetector(
               onTap: () {
-                print("修改个人信息");
+                Toast.show(context, "修改成功");
+                Future.delayed(Duration(seconds: 2), () {
+                  Navigator.of(context).maybePop();
+                });
               },
               child: Center(
                 child: Text(
@@ -181,11 +185,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         }),
                         DividerLine(1),
                         _itemInfo("家乡", hometown_label, () {
-                          CityPicker.showCityPicker(
-                              context, (prov, provCode, city, cityCode) {
-                                setState(() {
-                                  hometown_label = prov + " - " + city;
-                                });
+                          CityPicker.showCityPicker(context,
+                              (prov, provCode, city, cityCode) {
+                            setState(() {
+                              hometown_label = prov + " - " + city;
+                            });
                           });
                         }),
                       ],

@@ -7,14 +7,15 @@ class GarageItemWidget extends StatelessWidget {
   final int carVerifyState;
   final bool isNormalCar;
   final String carImg;
+  final VoidCallback callback;
 
-  GarageItemWidget({
-    @required this.carName,
-    @required this.carPlate,
-    @required this.carVerifyState,
-    @required this.isNormalCar,
-    @required this.carImg,
-  });
+  GarageItemWidget(
+      {@required this.carName,
+      @required this.carPlate,
+      @required this.carVerifyState,
+      @required this.isNormalCar,
+      @required this.carImg,
+      @required this.callback});
 
   @override
   Widget build(BuildContext context) {
@@ -134,12 +135,16 @@ class GarageItemWidget extends StatelessWidget {
                 bottom: 0,
                 right: 0,
                 child: GestureDetector(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                    child: Image.asset(
-                      'images/ic_garage_item_more.png',
-                      width: 3,
-                      height: 15,
+                  onTap: callback,
+                  child: Container(
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      child: Image.asset(
+                        'images/ic_garage_item_more.png',
+                        width: 3,
+                        height: 15,
+                      ),
                     ),
                   ),
                 ),
