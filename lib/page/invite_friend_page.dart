@@ -15,6 +15,8 @@ class InviteFriendPage extends StatefulWidget {
 class _InviteFriendPageState extends State<InviteFriendPage> {
   int _selectNum = 0;
   List<String> _letters = List();
+  GlobalKey _key = GlobalKey();
+  ScrollController _controller = ScrollController();
 
   List<Contact> _contacts = List();
   List<bool> _checkList = List();
@@ -121,6 +123,7 @@ class _InviteFriendPageState extends State<InviteFriendPage> {
         children: <Widget>[
           Positioned(
               child: ListView.separated(
+            controller: _controller,
             physics: BouncingScrollPhysics(),
             separatorBuilder: (context, index) {
               return DividerLine(1);
@@ -186,13 +189,17 @@ class _InviteFriendPageState extends State<InviteFriendPage> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: GestureDetector(
-                    onTap: () {
-                      print("taptap");
+                    onVerticalDragDown: (details) {
+                      _go2Item(details.globalPosition);
                     },
-                    onLongPressMoveUpdate: (details) {
-                      print("changed");
+                    onVerticalDragUpdate: (details) {
+                      _go2Item(details.globalPosition);
+                    },
+                    onVerticalDragEnd: (details) {
+                      print("onVerticalDragEnd");
                     },
                     child: Column(
+                      key: _key,
                       mainAxisSize: MainAxisSize.min,
                       children: _getLetters(),
                     ),
@@ -206,11 +213,38 @@ class _InviteFriendPageState extends State<InviteFriendPage> {
     );
   }
 
+  void _go2Item(Offset dragOffset) {
+    RenderBox _box = _key.currentContext.findRenderObject();
+    Offset _offset = _box.localToGlobal(Offset.zero);
+    print(_offset.dy);
+    print(dragOffset.dy);
+    double gap = dragOffset.dy - _offset.dy;
+    int index = gap ~/ 12;
+    print(index);
+    String letter = _letters[index];
+    print(letter);
+    for (int i = 0; i < _contacts.length; i++) {
+      if (_contacts[i].firstLetter == letter) {
+        print(i);
+        double offset = (index * 30.0 + i * 48.0);
+        _controller.animateTo(offset,
+            duration: Duration(milliseconds: 500), curve: Curves.ease);
+        break;
+      }
+    }
+  }
+
   List<Widget> _getLetters() {
     return _letters.map((v) {
-      return Text(
-        v,
-        style: TextStyle(fontSize: 12, color: Color(c_333333)),
+      return Container(
+        width: 24,
+        height: 12,
+        child: Center(
+          child: Text(
+            v,
+            style: TextStyle(fontSize: 12, color: Color(c_333333)),
+          ),
+        ),
       );
     }).toList();
   }
