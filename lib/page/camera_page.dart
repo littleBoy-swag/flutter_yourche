@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_yourche/page/photo_preview_page.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
 class CameraPage extends StatefulWidget {
@@ -14,6 +15,7 @@ class CameraPage extends StatefulWidget {
 class _CameraPageState extends State<CameraPage> {
   var cameras;
   CameraController _controller;
+  List<Asset> images = List<Asset>();
 
   @override
   void initState() {
@@ -109,10 +111,13 @@ class _CameraPageState extends State<CameraPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Image.asset(
-                            'images/ic_camera_photo.png',
-                            width: 24,
-                            height: 24,
+                          InkWell(
+                            onTap: _loadAssets,
+                            child: Image.asset(
+                              'images/ic_camera_photo.png',
+                              width: 24,
+                              height: 24,
+                            ),
                           ),
                           SizedBox(
                             width: 69,
@@ -226,4 +231,39 @@ class _CameraPageState extends State<CameraPage> {
       return null;
     }
   }
+
+  Future<void> _loadAssets() async {
+    List<Asset> resultList = List<Asset>();
+    String error = 'No Error Dectected';
+
+    try {
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 300,
+        enableCamera: true,
+        selectedAssets: images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          actionBarColor: "#abcdef",
+          actionBarTitle: "Example App",
+          allViewTitle: "All Photos",
+          useDetailsView: false,
+          selectCircleStrokeColor: "#000000",
+        ),
+      );
+    } on Exception catch (e) {
+      error = e.toString();
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+//    setState(() {
+//      images = resultList;
+//      _error = error;
+//    });
+  }
+
+
 }

@@ -4,6 +4,7 @@ import 'package:flutter_yourche/widgets/action_sheet/action_sheet_item.dart';
 import 'package:flutter_yourche/widgets/appbar.dart';
 import 'package:flutter_yourche/widgets/common_color.dart';
 import 'package:flutter_yourche/widgets/divider_line.dart';
+import 'package:flutter_yourche/widgets/gender_widget.dart';
 import 'package:flutter_yourche/widgets/toast.dart';
 
 import 'home_page/home_page.dart';
@@ -14,6 +15,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  String _gender = "0"; //1-女 2-男 0-未选择
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,72 +124,35 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                                 Row(
                                   children: <Widget>[
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Color(c_ff9bc6),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(16)),
-                                      ),
-                                      height: 32,
-                                      width: 57,
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            Image.asset(
-                                              'images/ic_gender_female.png',
-                                              width: 14,
-                                              height: 14,
-                                            ),
-                                            SizedBox(
-                                              width: 4,
-                                            ),
-                                            Text(
-                                              "女",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                    GenderWidget(
+                                        text: "女",
+                                        checkedImg:
+                                            'images/ic_gender_female.png',
+                                        uncheckedImg:
+                                            'images/ic_gender_female_unchecked.png',
+                                        checkColor: c_ff9bc6,
+                                        checked: _gender == "1",
+                                        callback: () {
+                                          setState(() {
+                                            _gender = "1";
+                                          });
+                                        }),
                                     Padding(
                                       padding:
                                           EdgeInsets.only(left: 8, right: 8),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Color(c_86cdff),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(16)),
-                                        ),
-                                        height: 32,
-                                        width: 57,
-                                        child: Center(
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: <Widget>[
-                                              Image.asset(
-                                                'images/ic_gender_male.png',
-                                                width: 14,
-                                                height: 14,
-                                              ),
-                                              SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text(
-                                                "男",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+                                      child: GenderWidget(
+                                          text: "男",
+                                          checkedImg:
+                                              'images/ic_gender_male.png',
+                                          uncheckedImg:
+                                              'images/ic_gender_male_unchecked.png',
+                                          checkColor: c_86cdff,
+                                          checked: _gender == "2",
+                                          callback: () {
+                                            setState(() {
+                                              _gender = "2";
+                                            });
+                                          }),
                                     ),
                                   ],
                                 ),

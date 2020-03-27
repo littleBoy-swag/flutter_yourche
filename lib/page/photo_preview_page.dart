@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_yourche/page/post_moment_page.dart';
 import 'package:flutter_yourche/widgets/common_color.dart';
 
 class PhotoPreViewPage extends StatefulWidget {
@@ -29,7 +30,8 @@ class _PhotoPreViewPageState extends State<PhotoPreViewPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                      },
                       child: Container(
                         width: 80,
                         height: 44,
@@ -59,7 +61,11 @@ class _PhotoPreViewPageState extends State<PhotoPreViewPage> {
                       width: 53,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                          return PostMomentPage();
+                        }));
+                      },
                       child: Container(
                         width: 80,
                         height: 44,
