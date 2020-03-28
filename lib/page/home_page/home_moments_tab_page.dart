@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_yourche/widgets/black_list_item.dart';
 import 'package:flutter_yourche/widgets/common_color.dart';
+import 'package:flutter_yourche/widgets/divider_line.dart';
 import 'package:flutter_yourche/widgets/filter_bottom_dialog.dart';
+import 'package:flutter_yourche/widgets/moment_item_widget.dart';
 
 import '../mine_page.dart';
-import '../search_user_page.dart';
 
 class HomeMomentsTabPage extends StatefulWidget {
   @override
@@ -48,12 +48,15 @@ class _HomeMomentsTabPageState extends State<HomeMomentsTabPage> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             GestureDetector(
-              child: Text(
-                "发现",
-                style: TextStyle(
-                    fontSize: _isFindTab ? 18 : 16,
-                    color: _isFindTab ? Color(c_ff6600) : Color(c_666666),
-                    fontWeight: FontWeight.bold),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  "发现",
+                  style: TextStyle(
+                      fontSize: _isFindTab ? 18 : 16,
+                      color: _isFindTab ? Color(c_ff6600) : Color(c_666666),
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               onTap: () {
                 setState(() {
@@ -65,12 +68,15 @@ class _HomeMomentsTabPageState extends State<HomeMomentsTabPage> {
               width: 15,
             ),
             GestureDetector(
-              child: Text(
-                "推荐",
-                style: TextStyle(
-                    fontSize: !_isFindTab ? 18 : 16,
-                    color: !_isFindTab ? Color(c_ff6600) : Color(c_666666),
-                    fontWeight: FontWeight.bold),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  "推荐",
+                  style: TextStyle(
+                      fontSize: !_isFindTab ? 18 : 16,
+                      color: !_isFindTab ? Color(c_ff6600) : Color(c_666666),
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               onTap: () {
                 setState(() {
@@ -101,7 +107,7 @@ class _HomeMomentsTabPageState extends State<HomeMomentsTabPage> {
           ),
         ],
       ),
-      body: EasyRefresh.custom(
+      body: EasyRefresh(
         controller: _controller,
         enableControlFinishRefresh: false,
         enableControlFinishLoad: true,
@@ -123,22 +129,17 @@ class _HomeMomentsTabPageState extends State<HomeMomentsTabPage> {
             _controller.finishLoad(noMore: _count >= 40);
           });
         },
-        slivers: <Widget>[
-          SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              return BlackListItemWidget(
-                avatar: 'images/logo.png',
-                name: "你好",
-                age: "12",
-                gender: (index % 2 == 0) ? "1" : "2",
-                blackTime: "2020-01-09 19:00:52",
-                callback: () {
-                  print("解除拉黑");
-                },
+        child: ListView.separated(
+            itemBuilder: (context, index) {
+              return MomentItemWidget(
+                voteChecked: false,
+                unvoteChecked: true,
               );
-            }, childCount: _count),
-          )
-        ],
+            },
+            separatorBuilder: (context, index) {
+              return DividerLine(10);
+            },
+            itemCount: _count),
       ),
     );
   }

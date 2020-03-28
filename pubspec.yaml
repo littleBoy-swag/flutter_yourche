@@ -100,6 +100,12 @@ flutter:
     - images/ic_check_box_checked.png
     - images/ic_check_box_unchecked.png
     - images/ic_filter.png
+    - images/ic_vote.png
+    - images/ic_voted.png
+    - images/ic_unvote.png
+    - images/ic_unvoted.png
+    - images/ic_comment.png
+    - images/ic_moment_loc.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
